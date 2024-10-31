@@ -18,7 +18,7 @@ public class StudentsList extends JFrame {
     private DataFilter dataFilter;
     private List<Data> dataList;
     private List<Data> filteredDataList;
-    private JTextField searchField;
+    private SearchBar searchField;
 
     private RoundedButton registerBtn;
     private RoundedButton updateBtn;
@@ -36,20 +36,20 @@ public class StudentsList extends JFrame {
 
         //Design for the top panel
         btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        registerBtn = new RoundedButton("Register");
+        registerBtn = new RoundedButton("Register", 200, 60);
         btnPanel.add(registerBtn);
-        updateBtn = new RoundedButton("Update");
+        updateBtn = new RoundedButton("Update", 200, 60);
         btnPanel.add(updateBtn);
-        viewListBtn = new RoundedButton("View List");
+        viewListBtn = new RoundedButton("View List", 200, 60);
         btnPanel.add(viewListBtn);
-        generateReportBtn = new RoundedButton("Generate Report");
+        generateReportBtn = new RoundedButton("Generate Report", 200, 60);
         btnPanel.add(generateReportBtn);
         panel.add(btnPanel, BorderLayout.NORTH);
 
 
         //Design for the bottom panel
         bottomPanel= new JPanel();
-        bottomPanel.setBackground(Color.LIGHT_GRAY);
+        bottomPanel.setBackground(Color.WHITE);
 
         searchBarPanel = new JPanel();
         searchBarPanel.setLayout(new BorderLayout());
@@ -64,7 +64,7 @@ public class StudentsList extends JFrame {
         dataFilter = new DataFilter(dataList);
 
         //Adding and creating search bar
-        searchField = new JTextField();
+        searchField = new SearchBar(20);
         searchField.setPreferredSize(new Dimension(300, 30));
         searchBarPanel.add(searchField, BorderLayout.NORTH);
 
@@ -83,9 +83,12 @@ public class StudentsList extends JFrame {
             public void changedUpdate(DocumentEvent e) {
                 performSearch();
             }
-
+            //Checks for default search string and filters data
             private void performSearch() {
                 String searchText = searchField.getText().toLowerCase();
+                if (searchText.equals("search...")) {
+                    searchText = "";
+                }
                 dataFilter.filterData(searchText);
                 dataFilter.displayFilteredData();
                 refreshUI();

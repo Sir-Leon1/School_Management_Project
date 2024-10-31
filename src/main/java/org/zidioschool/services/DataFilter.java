@@ -1,7 +1,9 @@
 package org.zidioschool.services;
+
 import org.zidioschool.model.Data;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -15,13 +17,17 @@ public class DataFilter {
     }
 
 
-    public List<Data> filterData( String searchText) {
+    public List<Data> filterData(String searchText) {
+        if (searchText.isEmpty()) {
+            filteredDataList = dataList;
+        } else {
 
-        filteredDataList = dataList.stream()
-                .filter(d -> d.getName().toLowerCase().contains(searchText) ||
-                d.getPhoneNumber().contains(searchText) ||
-                d.getClassName().toLowerCase().contains(searchText))
-                .collect(Collectors.toList());
+            filteredDataList = dataList.stream()
+                    .filter(d -> d.getName().toLowerCase().contains(searchText) ||
+                            d.getPhoneNumber().contains(searchText) ||
+                            d.getClassName().toLowerCase().contains(searchText))
+                    .collect(Collectors.toList());
+        }
 
         return filteredDataList;
     }

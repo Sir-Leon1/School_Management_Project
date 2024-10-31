@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundedButton extends JButton{
-    public RoundedButton(String text) {
+    public RoundedButton(String text, int width, int height) {
         super(text);
         setFocusPainted(false);
         setBorderPainted(false);
         setContentAreaFilled(false);
-        setPreferredSize(new Dimension(200, 60));
+        setPreferredSize(new Dimension(width, height));
         setBackground(new Color(70, 130, 180));
         setForeground(Color.WHITE);
         setFont(new Font("Grauda", Font.BOLD, 16));
