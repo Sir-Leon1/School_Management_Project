@@ -18,15 +18,8 @@ public class SearchBar extends JTextField {
         // Set placeholder text
         setText("Search...");
         setForeground(Color.GRAY);
+        setFont(new Font("Grauda", Font.PLAIN, 16));
 
-        // Add padding and remove default border
-        setBorder(new EmptyBorder(20, 40, 20, 40)); // padding around text
-
-        // Set margin to add spacing between text and border
-        setMargin(new Insets(10, 40, 10, 10));
-
-        // Set preferred size
-        setPreferredSize(new Dimension(800, 40));
 
         // Add a focus listener to handle placeholder text
         addFocusListener(new FocusAdapter() {
@@ -69,7 +62,10 @@ public class SearchBar extends JTextField {
         });
 
         // Set rounded border
-        setBorder(new RoundedCornerBorder());
+        setBorder(BorderFactory.createCompoundBorder(
+                new RoundedCornerBorder(),
+                new EmptyBorder(0, 10, 0, 10)
+        ));
     }
 
     // Custom border for rounded corners

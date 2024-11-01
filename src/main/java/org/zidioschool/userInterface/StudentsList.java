@@ -5,6 +5,7 @@ import org.zidioschool.services.DataFilter;
 import javax.swing.*;
 import java.awt.*;
 
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class StudentsList extends JFrame {
     private JPanel btnPanel;
     private JPanel bottomPanel;
     private JPanel searchBarPanel;
+    private JPanel tablePanel;
     private DataFilter dataFilter;
     private List<Data> dataList;
     private List<Data> filteredDataList;
@@ -49,12 +51,16 @@ public class StudentsList extends JFrame {
 
         //Design for the bottom panel
         bottomPanel= new JPanel();
+        bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        bottomPanel.setLayout(new BorderLayout());
         bottomPanel.setBackground(Color.WHITE);
 
+        //Design for the search bar panel
         searchBarPanel = new JPanel();
         searchBarPanel.setLayout(new BorderLayout());
-
-        // Sample data
+        searchBarPanel.setBorder(new EmptyBorder(0, 150, 0, 150));
+        searchBarPanel.setBackground(Color.WHITE);
+        // TODO: Remove this Sample data
         dataList = new ArrayList<>();
         dataList.add(new Data("Alice", "1234567890", "Class A"));
         dataList.add(new Data("Bob", "0987654321", "Class B"));
@@ -63,9 +69,9 @@ public class StudentsList extends JFrame {
 
         dataFilter = new DataFilter(dataList);
 
-        //Adding and creating search bar
+        //Creating and adding the search bar
         searchField = new SearchBar(20);
-        searchField.setPreferredSize(new Dimension(300, 30));
+        searchField.setPreferredSize(new Dimension(300, 40));
         searchBarPanel.add(searchField, BorderLayout.NORTH);
 
         searchField.getDocument().addDocumentListener(new DocumentListener() {
@@ -96,7 +102,18 @@ public class StudentsList extends JFrame {
         });
 
         dataFilter.displayFilteredData();
-        bottomPanel.add(searchBarPanel);
+        bottomPanel.add(searchBarPanel, BorderLayout.NORTH);
+
+        //Table panel Design
+        tablePanel = new JPanel(new BorderLayout(15, 15));
+        tablePanel.setBorder(new EmptyBorder(20, 100, 20, 100));
+        tablePanel.setBackground(Color.WHITE);
+        tablePanel.setPreferredSize(new Dimension(300, 300));
+
+
+        Table table = new Table();
+        tablePanel.add(table, BorderLayout.NORTH);
+        bottomPanel.add(tablePanel);
         panel.add(bottomPanel);
 
         setVisible(true);
