@@ -1,17 +1,92 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.userInterface.customComponents.RoundedButton;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainUI {
-    public static JFrame frame;
+public class MainUI extends JFrame{
+    private JPanel mainPanel;
+    private JPanel btnPanel;
+    private JPanel tabPanel;
+    private ViewList viewList;
+    private RegistrationPanel registrationPanel;
+    private UpdatePanel updatePanel;
+    private ReportPanel reportPanel;
 
-    public static void ShowApp () {
-        frame = new JFrame("Zidio School Manager");
+    private RoundedButton registerBtn;
+    private RoundedButton updateBtn;
+    private RoundedButton viewListBtn;
+    private RoundedButton generateReportBtn;
 
-        //Set default close operation so app exits when you close the window
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public MainUI() {
+        setTitle("Zidio School manager");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1500, 800);
+        setLocationRelativeTo(null);
+        mainPanel = new JPanel();
+        setContentPane(mainPanel);
+        mainPanel.setLayout(new BorderLayout());
 
-        frame.setSize(400, 300);
+        btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        registerBtn = new RoundedButton("Register", 200, 60);
+        updateBtn = new RoundedButton("Update", 200, 60);
+        viewListBtn = new RoundedButton("View List", 200, 60);
+        generateReportBtn = new RoundedButton("Generate Report", 200, 60);
+
+        btnPanel.add(registerBtn);
+        btnPanel.add(updateBtn);
+        btnPanel.add(viewListBtn);
+        btnPanel.add(generateReportBtn);
+        add(btnPanel, BorderLayout.NORTH);
+
+        tabPanel = new JPanel(new CardLayout());
+        tabPanel.setBackground(Color.WHITE);
+        mainPanel.add(tabPanel);
+
+        registrationPanel = new RegistrationPanel();
+        updatePanel = new UpdatePanel();
+        viewList = new ViewList();
+        reportPanel = new ReportPanel();
+
+        tabPanel.add(viewList, "ViewListPanel");
+        tabPanel.add(registrationPanel, "RegistrationPanel");
+        tabPanel.add(updatePanel, "UpdatePanel");
+        tabPanel.add(reportPanel, "ReportPanel");
+
+        registerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) tabPanel.getLayout();
+                cl.show(tabPanel, "RegistrationPanel");
+            }
+        });
+
+        updateBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) tabPanel.getLayout();
+                cl.show(tabPanel, "UpdatePanel");
+            }
+        });
+
+        viewListBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) tabPanel.getLayout();
+                cl.show(tabPanel, "ViewListPanel");
+            }
+        });
+
+        generateReportBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) tabPanel.getLayout();
+                cl.show(tabPanel, "ReportPanel");
+            }
+        });
+
+        setVisible(true);
     }
 }

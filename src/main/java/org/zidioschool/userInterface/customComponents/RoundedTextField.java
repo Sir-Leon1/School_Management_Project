@@ -1,4 +1,4 @@
-package org.zidioschool.userInterface;
+package org.zidioschool.userInterface.customComponents;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,14 +9,14 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class SearchBar extends JTextField {
+public class RoundedTextField extends JTextField {
     private boolean isClicked = false;
 
-    public SearchBar(int columns) {
+    public RoundedTextField(int columns, String placeholder) {
         super(columns);
 
         // Set placeholder text
-        setText("Search...");
+        setText(placeholder);
         setForeground(Color.GRAY);
         setFont(new Font("Grauda", Font.PLAIN, 16));
 
@@ -26,7 +26,7 @@ public class SearchBar extends JTextField {
             @Override
             public void focusGained(FocusEvent e) {
                 isClicked = true;
-                if (getText().equals("Search...")) {
+                if (getText().equals(placeholder)) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
@@ -36,7 +36,7 @@ public class SearchBar extends JTextField {
             public void focusLost(FocusEvent e) {
                 isClicked = false;
                 if (getText().isEmpty()) {
-                    setText("Search...");
+                    setText(placeholder);
                     setForeground(Color.GRAY);
                 }
             }
@@ -46,7 +46,7 @@ public class SearchBar extends JTextField {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (getText().equals("Search...")) {
+                if (getText().equals(placeholder)) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
@@ -55,7 +55,7 @@ public class SearchBar extends JTextField {
             @Override
             public void mouseExited(MouseEvent e) {
                 if (!isClicked && getText().isEmpty()) {
-                    setText("Search...");
+                    setText(placeholder);
                     setForeground(Color.GRAY);
                 }
             }

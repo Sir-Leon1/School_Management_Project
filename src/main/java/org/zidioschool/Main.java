@@ -1,17 +1,13 @@
 package org.zidioschool;
 
-import org.zidioschool.userInterface.StudentsList;
-import org.zidioschool.userInterface.StudentsView;
-
+import org.zidioschool.userInterface.MainUI;
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            StudentsList studentsList = new StudentsList();
-            studentsList.setVisible(true);
-
-            studentsList.refreshUI();
+            MainUI mainUI = new MainUI();
+            mainUI.setVisible(true);
         });
     }
 }

@@ -1,11 +1,9 @@
-package org.zidioschool.userInterface;
+package org.zidioschool.userInterface.customComponents;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
@@ -18,7 +16,7 @@ public class Table extends JScrollPane {
     private Color selectedRowColor = new Color(52, 152, 219, 50);
     private Color hoverRowColor = new Color(52, 152, 219, 30);
     private int hoveredRow = -1;
-    private Color buttonColor = new Color(64, 158, 255);
+    private Color buttonColor = new Color(87, 91, 198);
     private Color buttonHoverColor = new Color(102, 177, 255);
     private Color buttonPressedColor = new Color(58, 142, 230);
 
@@ -41,7 +39,7 @@ public class Table extends JScrollPane {
                                                            int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
                         isSelected, hasFocus, row, column);
-                label.setBackground(new Color(52, 152, 219));
+                label.setBackground(new Color(87, 91, 198));
                 label.setForeground(Color.WHITE);
                 label.setFont(label.getFont().deriveFont(Font.BOLD, 18f));
                 label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -182,46 +180,8 @@ public class Table extends JScrollPane {
         getViewport().setBackground(Color.WHITE);
     }
 
-    public static class MyTableModel extends AbstractTableModel {
-        private final String[] columnNames = {"ID", "Name", "Phone", "Class", "Action"};
-        private final Object[][] data = {
-                {1, "Alice", "1234567890", "Class A", "Edit"},
-                {2, "Bob", "0987654321", "Class B", "Edit"},
-                {3, "Charlie", "1122334455", "Class C", "Edit"},
-                {4, "Daisy", "5566778899", "Class D", "Edit"},
-                {5, "Edward", "6655443322", "Class E", "Edit"}
-        };
+    public class StudentsTableModel extends AbstractTableModel {
 
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        @Override
-        public int getRowCount() {
-            return data.length;
-        }
-
-        @Override
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
-
-        @Override
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int col) {
-            return col == 4; //Set only the last column as editable;
-        }
-
-        @Override
-        public void setValueAt(Object value, int row, int col) {
-            data[row][col] = value;
-            fireTableCellUpdated(row, col);
-        }
     }
 
 
