@@ -1,5 +1,7 @@
 package org.zidioschool.userInterface;
-import org.zidioschool.model.Data;
+import org.zidioschool.model.StudentDAO;
+import org.zidioschool.model.modelClasses.Data;
+import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.services.DataFilter;
 import org.zidioschool.userInterface.customComponents.RoundedPanel;
 import org.zidioschool.userInterface.customComponents.SearchBar;
@@ -11,8 +13,6 @@ import java.awt.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,45 +39,15 @@ public class ViewList extends JPanel {
         searchBarPanel.setBorder(new EmptyBorder(0, 150, 0, 150));
         searchBarPanel.setBackground(Color.WHITE);
 
-        // TODO: Remove this Sample data
-        dataList = new ArrayList<>();
-        dataList.add(new Data("Alice", "1234567890", "Class A"));
-        dataList.add(new Data("Bob", "0987654321", "Class B"));
-        dataList.add(new Data("Charlie", "1234509876", "Class A"));
-        dataList.add(new Data("Daisy", "1122334455", "Class C"));
-
-        dataFilter = new DataFilter(dataList);
+        //TODO: Get data from the database
+        List<Student> students = new StudentDAO().getAllStudents();
+        Table.StudentsTableModel tableModel = new Table.StudentsTableModel(students);
+        dataFilter = new DataFilter(students, tableModel);
 
         //Creating and adding the search bar
-        searchField = new SearchBar(20);
+        searchField = new SearchBar(20, students, dataFilter);
         searchField.setPreferredSize(new Dimension(300, 40));
         searchBarPanel.add(searchField, BorderLayout.NORTH);
-
-        searchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                performSearch();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                performSearch();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                performSearch();
-            }
-            //Checks for default search string and filters data
-            private void performSearch() {
-                String searchText = searchField.getText().toLowerCase();
-                if (searchText.equals("search...")) {
-                    searchText = "";
-                }
-                dataFilter.filterData(searchText);
-                dataFilter.displayFilteredData();
-            }
-        });
 
         dataFilter.displayFilteredData();
         add(searchBarPanel, BorderLayout.NORTH);
@@ -89,7 +59,7 @@ public class ViewList extends JPanel {
         tablePanel.setBackground(Color.WHITE);
         tablePanel.setPreferredSize(new Dimension(300, 300));
 
-        Table table = new Table();
+        Table table = new Table(searchField.getFilteredDataList(), tableModel);
         tablePanel.add(table, BorderLayout.NORTH);
         add(tablePanel, BorderLayout.CENTER);
 

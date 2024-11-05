@@ -1,4 +1,4 @@
-package org.zidioschool.model;
+package org.zidioschool.model.modelClasses;
 
 public class Data {
     private String name;

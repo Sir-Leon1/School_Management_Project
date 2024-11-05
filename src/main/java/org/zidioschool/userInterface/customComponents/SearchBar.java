@@ -1,24 +1,62 @@
 package org.zidioschool.userInterface.customComponents;
+import org.zidioschool.model.modelClasses.Student;
+import org.zidioschool.services.DataFilter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class SearchBar extends JTextField {
     private boolean isClicked = false;
+    private List<Student> students;
+    private List<Student> filteredDataList;
+    private DataFilter dataFilter;
 
-    public SearchBar(int columns) {
+    public SearchBar(int columns, List<Student> students, DataFilter dataFilter) {
         super(columns);
+        this.students = students;
+        this.dataFilter = dataFilter;
+        this.filteredDataList = students;
 
         // Set placeholder text
         setText("Search...");
         setForeground(Color.GRAY);
         setFont(new Font("Grauda", Font.PLAIN, 16));
+
+        getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                performSearch();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                performSearch();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                performSearch();
+            }
+            //Checks for default search string and filters data
+            private void performSearch() {
+                String searchText = getText().toLowerCase();
+                if (searchText.equals("search...")) {
+                    searchText = "";
+                }
+                //dataFilter = new DataFilter(students);
+                filteredDataList = dataFilter.filterData(searchText);
+                //dataFilter.displayFilteredData();
+            }
+        });
 
 
         // Add a focus listener to handle placeholder text
@@ -66,6 +104,10 @@ public class SearchBar extends JTextField {
                 new RoundedCornerBorder(),
                 new EmptyBorder(0, 10, 0, 10)
         ));
+    }
+
+    public List<Student> getFilteredDataList() {
+        return filteredDataList;
     }
 
     // Custom border for rounded corners

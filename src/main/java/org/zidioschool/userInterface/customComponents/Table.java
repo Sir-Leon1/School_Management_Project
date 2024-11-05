@@ -1,5 +1,9 @@
 package org.zidioschool.userInterface.customComponents;
 
+import org.zidioschool.model.ClassDAO;
+import org.zidioschool.model.modelClasses.Clss;
+import org.zidioschool.model.modelClasses.Student;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -8,6 +12,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 //Create table with custom TableModel
 public class Table extends JScrollPane {
@@ -21,8 +27,8 @@ public class Table extends JScrollPane {
     private Color buttonPressedColor = new Color(58, 142, 230);
 
 
-    public Table() {
-        JTable table = new JTable(new MyTableModel());
+    public Table(List<Student> students, StudentsTableModel tableModel) {
+        JTable table = new JTable(tableModel);
         table.setRowHeight(60);
         table.setShowGrid(false);
         table.setIntercellSpacing(new Dimension(0, 0));
@@ -180,28 +186,72 @@ public class Table extends JScrollPane {
         getViewport().setBackground(Color.WHITE);
     }
 
-    public class StudentsTableModel extends AbstractTableModel {
+    public static class StudentsTableModel extends AbstractTableModel {
+        private List<Student> students;
+        private final String[] columnNames = {"First Name", "Last Name", "Phone", "Class", "Action"};
+        private List<Clss> classes = new ClassDAO().getAllClasses();
 
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
+        public StudentsTableModel(List<Student> students) {
+            this.students = students;
         }
 
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Table Demo");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(800, 600);
+        public void updateData(List<Student> students) {
+            this.students = students;
+            fireTableDataChanged();
+        }
 
-            // Instantiate and add the Table class
-            Table table = new Table();
-            frame.add(table);
+        @Override
+        public int getRowCount() {
+            return students.size();
+        }
 
-            frame.setVisible(true);
-        });
+        @Override
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            return columnNames[columnIndex];
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Student student = students.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return student.getFirstName();
+                case 1:
+                    return student.getLastName();
+                case 2:
+                    return student.getPhone1();
+                case 3:
+                    return student.getClassName(classes);
+                default:
+                    return null;
+            }
+
+        }
     }
+
+
+//    public static void main(String[] args) {
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        SwingUtilities.invokeLater(() -> {
+//            JFrame frame = new JFrame("Table Demo");
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            frame.setSize(800, 600);
+//
+//            // Instantiate and add the Table class
+//            Table table = new Table();
+//            frame.add(table);
+//
+//            frame.setVisible(true);
+//        });
+//    }
 }
