@@ -1,12 +1,16 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.Main;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainUI extends JFrame{
+public class MainUI extends JFrame {
+    private static MainUI mainUI;
+
     private JPanel mainPanel;
     private JPanel btnPanel;
     private JPanel tabPanel;
@@ -23,7 +27,7 @@ public class MainUI extends JFrame{
     public MainUI() {
         setTitle("Zidio School manager");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 800);
+        setSize(1500, 850);
         setLocationRelativeTo(null);
         mainPanel = new JPanel();
         setContentPane(mainPanel);
@@ -35,9 +39,9 @@ public class MainUI extends JFrame{
         viewListBtn = new RoundedButton("View List", 200, 60);
         generateReportBtn = new RoundedButton("Generate Report", 200, 60);
 
-        btnPanel.add(registerBtn);
-        btnPanel.add(updateBtn);
         btnPanel.add(viewListBtn);
+        btnPanel.add(updateBtn);
+        btnPanel.add(registerBtn);
         btnPanel.add(generateReportBtn);
         add(btnPanel, BorderLayout.NORTH);
 
@@ -88,5 +92,16 @@ public class MainUI extends JFrame{
         });
 
         setVisible(true);
+    }
+
+    public static synchronized MainUI getInstance() {
+        if (mainUI == null) {
+            mainUI = new MainUI();
+        }
+        return mainUI;
+    }
+
+    public ViewList getViewList() {
+        return viewList;
     }
 }

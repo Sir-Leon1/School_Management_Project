@@ -110,6 +110,10 @@ public class SearchBar extends JTextField {
         return filteredDataList;
     }
 
+    public void setStudent(List<Student> student) {
+        this.students = student;
+    }
+
     // Custom border for rounded corners
     private static class RoundedCornerBorder extends MatteBorder {
         public RoundedCornerBorder() {

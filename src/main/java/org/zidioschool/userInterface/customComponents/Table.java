@@ -232,6 +232,10 @@ public class Table extends JScrollPane {
             }
 
         }
+
+        public void setStudent(List<Student> student) {
+            this.students = student;
+        }
     }
 
 

@@ -25,6 +25,8 @@ public class ViewList extends JPanel {
     private List<Data> dataList;
     private List<Data> filteredDataList;
     private SearchBar searchField;
+    private List<Student> students;
+    private Table.StudentsTableModel tableModel;
 
     public ViewList() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -39,9 +41,9 @@ public class ViewList extends JPanel {
         searchBarPanel.setBorder(new EmptyBorder(0, 150, 0, 150));
         searchBarPanel.setBackground(Color.WHITE);
 
-        //TODO: Get data from the database
-        List<Student> students = new StudentDAO().getAllStudents();
-        Table.StudentsTableModel tableModel = new Table.StudentsTableModel(students);
+        //Retreives data from the database and creates an instance of the stdt-table model
+        students = new StudentDAO().getAllStudents();
+        tableModel = new Table.StudentsTableModel(students);
         dataFilter = new DataFilter(students, tableModel);
 
         //Creating and adding the search bar
@@ -49,7 +51,7 @@ public class ViewList extends JPanel {
         searchField.setPreferredSize(new Dimension(300, 40));
         searchBarPanel.add(searchField, BorderLayout.NORTH);
 
-        dataFilter.displayFilteredData();
+        //dataFilter.displayFilteredData();
         add(searchBarPanel, BorderLayout.NORTH);
 
         //Table mainPanel Design
@@ -71,6 +73,15 @@ public class ViewList extends JPanel {
         lastPanel.setPreferredSize(new Dimension(300, 100));
         lastPanel.setOpaque(true);
         add(lastPanel, BorderLayout.SOUTH);
+    }
+
+    public void updateStudentData(){
+        List<Student> student = new StudentDAO().getAllStudents();
+        this.students = student;
+        tableModel.setStudent(student);
+        tableModel.fireTableDataChanged();
+        dataFilter.setStudent(student);
+        searchField.setStudent(student);
     }
 
 }

@@ -17,6 +17,9 @@ public class DataFilter {
 
     public DataFilter(List<Student> dataList, Table.StudentsTableModel tableModel) {
         this.dataList = dataList;
+        if (tableModel == null) {
+            this.tableModel = new Table.StudentsTableModel(new ArrayList<>());
+        }
         this.tableModel = tableModel;
         this.filteredDataList = dataList; //Initial Data
     }
@@ -36,8 +39,10 @@ public class DataFilter {
                             d.getClassName(classes).toLowerCase().contains(searchText))
                     .collect(Collectors.toList());
         }
-        tableModel.updateData(filteredDataList);
-        displayFilteredData();
+        if (tableModel != null) {
+            tableModel.updateData(filteredDataList);
+        }
+        //displayFilteredData();
         return filteredDataList;
     }
 
@@ -48,5 +53,9 @@ public class DataFilter {
             System.out.println(data);
         }
         System.out.println("-----");
+    }
+
+    public void setStudent(List<Student> student) {
+        this.dataList = student;
     }
 }
