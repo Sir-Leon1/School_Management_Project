@@ -62,32 +62,28 @@ public class MainUI extends JFrame {
         registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) tabPanel.getLayout();
-                cl.show(tabPanel, "RegistrationPanel");
+                switchPanel("RegistrationPanel");
             }
         });
 
         updateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) tabPanel.getLayout();
-                cl.show(tabPanel, "UpdatePanel");
+                switchPanel("UpdatePanel");
             }
         });
 
         viewListBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) tabPanel.getLayout();
-                cl.show(tabPanel, "ViewListPanel");
+                switchPanel("ViewListPanel");
             }
         });
 
         generateReportBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) tabPanel.getLayout();
-                cl.show(tabPanel, "ReportPanel");
+                switchPanel("ReportPanel");
             }
         });
 
@@ -101,7 +97,15 @@ public class MainUI extends JFrame {
         return mainUI;
     }
 
+    public void switchPanel(String panelName) {
+        CardLayout cl = (CardLayout) tabPanel.getLayout();
+        cl.show(tabPanel, panelName);
+    }
     public ViewList getViewList() {
         return viewList;
+    }
+
+    public UpdatePanel getUpdatePanel() {
+        return updatePanel;
     }
 }

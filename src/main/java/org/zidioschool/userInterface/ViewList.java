@@ -26,6 +26,7 @@ public class ViewList extends JPanel {
     private List<Data> filteredDataList;
     private SearchBar searchField;
     private List<Student> students;
+    private Table table;
     private Table.StudentsTableModel tableModel;
 
     public ViewList() {
@@ -61,7 +62,7 @@ public class ViewList extends JPanel {
         tablePanel.setBackground(Color.WHITE);
         tablePanel.setPreferredSize(new Dimension(300, 300));
 
-        Table table = new Table(searchField.getFilteredDataList(), tableModel);
+        table = new Table(tableModel);
         tablePanel.add(table, BorderLayout.NORTH);
         add(tablePanel, BorderLayout.CENTER);
 
@@ -84,4 +85,11 @@ public class ViewList extends JPanel {
         searchField.setStudent(student);
     }
 
+    public Table getTable(){
+        return table;
+    }
+
+    public Table.StudentsTableModel getTableModel() {
+        return tableModel;
+    }
 }

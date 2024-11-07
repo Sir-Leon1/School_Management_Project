@@ -3,6 +3,7 @@ package org.zidioschool.services;
 import org.zidioschool.model.ClassDAO;
 import org.zidioschool.model.modelClasses.Clss;
 import org.zidioschool.model.modelClasses.Student;
+import org.zidioschool.userInterface.MainUI;
 import org.zidioschool.userInterface.customComponents.Table;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class DataFilter {
         if (tableModel != null) {
             tableModel.updateData(filteredDataList);
         }
+        MainUI.getInstance().getViewList().getTable().updateTableData(filteredDataList);
         //displayFilteredData();
         return filteredDataList;
     }

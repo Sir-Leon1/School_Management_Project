@@ -243,7 +243,7 @@ public class UpdatePanel extends JPanel {
         guardianEmailField.setText("Guardian Email");
     }
 
-    private void updateFieldsWithStudentData(List<Student> studentData) {
+    public void updateFieldsWithStudentData(List<Student> studentData) {
         if (studentData.size() == 1) {
             Student student = studentData.getFirst();
             firstNameField.setText(student.getFirstName());
@@ -321,6 +321,8 @@ public class UpdatePanel extends JPanel {
 
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.updateStudent(student);
+        MainUI.getInstance().getViewList().updateStudentData();
+
     }
 
     public String getFirstName() {
