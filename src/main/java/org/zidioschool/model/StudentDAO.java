@@ -76,7 +76,7 @@ public class StudentDAO {
     }
 
     public boolean addStudent(Student student) {
-        String query = "INSERT INTO students (first_name, middle_name, last_name, age, phone1, phone2, email, guardian_phone1, guardian_phone2, guardian_email, class_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO students (first_name, middle_name, last_name, age, phone1, phone2, email, guardian_phone1, guardian_phone2, guardian_email, class_id, id_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, student.getFirstName());
@@ -90,6 +90,7 @@ public class StudentDAO {
             statement.setString(9, student.getGuardianPhone2());
             statement.setString(10, student.getGuardianEmail());
             statement.setInt(11, student.getClassId());
+            statement.setString(12, student.getIdNumber());
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

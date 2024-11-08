@@ -66,7 +66,11 @@ public class ViewList extends JPanel {
         tablePanel.add(table, BorderLayout.NORTH);
         add(tablePanel, BorderLayout.CENTER);
 
-        //TODO Do something with this mainPanel
+        //TODO Do something with this lastPanel
+        /**
+         * Add clear button for the search bar
+         *
+         */
         lastPanel = new JPanel();
         lastPanel.setLayout(new BorderLayout());
         lastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));

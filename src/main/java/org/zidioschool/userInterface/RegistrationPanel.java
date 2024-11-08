@@ -1,5 +1,6 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.model.ClassDAO;
 import org.zidioschool.model.StudentDAO;
 import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.userInterface.customComponents.GradientPanel;
@@ -247,10 +248,9 @@ public class RegistrationPanel extends JPanel {
         student.setFirstName(getFirstName());
         student.setMiddleName(getMiddleName());
         student.setLastName(getLastName());
-        student.setId(Integer.parseInt(getIdNumber()));
+        student.setIdNumber(getIdNumber());
         student.setAge(Integer.parseInt(getAge()));
-        //TODO fix the conversion of class names to ids
-        student.setClassId(Integer.parseInt(getClassField()));
+        student.setClassId(new ClassDAO().getClassIdByName(getClassField()));
         student.setPhone1(getPhone1());
         student.setPhone2(getPhone2());
         student.setEmail(getEmail());
@@ -261,6 +261,7 @@ public class RegistrationPanel extends JPanel {
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.addStudent(student);
         MainUI.getInstance().getViewList().updateStudentData();
+        MainUI.getInstance().getUpdatePanel().updateStudentData();
     }
 
     public String getFirstName() {

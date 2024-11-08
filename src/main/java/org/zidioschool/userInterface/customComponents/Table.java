@@ -1,6 +1,7 @@
 package org.zidioschool.userInterface.customComponents;
 
 import org.zidioschool.model.ClassDAO;
+import org.zidioschool.model.StudentDAO;
 import org.zidioschool.model.modelClasses.Clss;
 import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.userInterface.MainUI;
@@ -30,6 +31,7 @@ public class Table extends JScrollPane {
 
 
     public Table(StudentsTableModel tableModel) {
+        students = new StudentDAO().getAllStudents();
         JTable table = new JTable(tableModel);
         table.setRowHeight(60);
         table.setShowGrid(false);

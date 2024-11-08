@@ -1,6 +1,8 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.model.ClassDAO;
 import org.zidioschool.model.StudentDAO;
+import org.zidioschool.model.modelClasses.Clss;
 import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.services.DataFilter;
 import org.zidioschool.userInterface.customComponents.*;
@@ -33,6 +35,8 @@ public class UpdatePanel extends JPanel {
     private RoundedTextField guardianPhone2Field;
     private RoundedTextField guardianEmailField;
     private GradientPanel lastPanel;
+    private Student studentInView;
+    private List<Student> students;
 
     public UpdatePanel() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -48,7 +52,7 @@ public class UpdatePanel extends JPanel {
         searchBarPanel.setBorder(new EmptyBorder(0, 150, 0, 150));
         searchBarPanel.setBackground(Color.WHITE);
         //Retrieve data from the database and create an instance of the stdt-table model
-        List<Student> students = new StudentDAO().getAllStudents();
+        students = new StudentDAO().getAllStudents();
         dataFilter = new DataFilter(students, null);
         searchBtn = new RoundedButton("Search", 100, 40);
         searchBtn.addActionListener(e -> {
@@ -220,6 +224,10 @@ public class UpdatePanel extends JPanel {
         lastPanel.add(deleteButton, constraints);
     }
 
+    public void updateStudentData() {
+        this.students = new StudentDAO().getAllStudents();
+    }
+
     private void setLabelFont(JLabel label) {
         label.setFont(new Font("Grauda", Font.BOLD, 16));
     }
@@ -245,19 +253,21 @@ public class UpdatePanel extends JPanel {
 
     public void updateFieldsWithStudentData(List<Student> studentData) {
         if (studentData.size() == 1) {
+            List<Clss> classes = new ClassDAO().getAllClasses();
             Student student = studentData.getFirst();
             firstNameField.setText(student.getFirstName());
             middleNameField.setText(student.getMiddleName());
             lastNameField.setText(student.getLastName());
-            //idNumberField.setText(String.parseString(student.getId()));
+            idNumberField.setText(String.valueOf(student.getIdNumber()));
             ageField.setText(String.valueOf(student.getAge()));
-            //classField.setText(student.getClassName());
+            classField.setText(student.getClassName(classes));
             phone1Field.setText(student.getPhone1());
             phone2Field.setText(student.getPhone2());
             emailField.setText(student.getEmail());
             guardianPhone1Field.setText(student.getGuardianPhone1());
             guardianPhone2Field.setText(student.getGuardianPhone2());
             guardianEmailField.setText(student.getGuardianEmail());
+            studentInView = student;
         }
     }
 
@@ -299,28 +309,46 @@ public class UpdatePanel extends JPanel {
             deleteStudent();
         }
     }
+    //TODO: Handle invalid data input for registration and update panels
 
+    //TODO: Make sure to update the table after deleting a student
+
+    /**
+     *
+     * Accesed the current student in view object via the
+     * stdInView variable that is set whenever a student is inserted to the fields.
+     */
     private void deleteStudent() {
         StudentDAO studentDAO = new StudentDAO();
-        studentDAO.deleteStudent(Integer.parseInt(getIdNumber()));
+        studentDAO.deleteStudent(studentInView.getId());
+        MainUI.getInstance().getViewList().updateStudentData();
+
     }
 
+    //todo Updating to the table does not work
+
+    /**
+     * Fix this by creating a table id as the primary key in the students table
+     * and using id number just as a reference to the student
+     * These changes require you to fix the StudentDAO class and the database
+     */
     private void updateStudent() {
-        Student student = new Student();
-        student.setFirstName(getFirstName());
-        student.setMiddleName(getMiddleName());
-        student.setLastName(getLastName());
-        student.setId(Integer.parseInt(getIdNumber()));
-        student.setAge(Integer.parseInt(getAge()));
-        student.setPhone1(getPhone1());
-        student.setPhone2(getPhone2());
-        student.setEmail(getEmail());
-        student.setGuardianPhone1(getGuardianPhone1());
-        student.setGuardianPhone2(getGuardianPhone2());
-        student.setGuardianEmail(getGuardianEmail());
+        Clss clss = new Clss();
+        studentInView.setFirstName(getFirstName());
+        studentInView.setMiddleName(getMiddleName());
+        studentInView.setLastName(getLastName());
+        studentInView.setIdNumber(getIdNumber());
+        studentInView.setClassId(new ClassDAO().getClassIdByName(getClassField()));
+        studentInView.setAge(Integer.parseInt(getAge()));
+        studentInView.setPhone1(getPhone1());
+        studentInView.setPhone2(getPhone2());
+        studentInView.setEmail(getEmail());
+        studentInView.setGuardianPhone1(getGuardianPhone1());
+        studentInView.setGuardianPhone2(getGuardianPhone2());
+        studentInView.setGuardianEmail(getGuardianEmail());
 
         StudentDAO studentDAO = new StudentDAO();
-        studentDAO.updateStudent(student);
+        studentDAO.updateStudent(studentInView);
         MainUI.getInstance().getViewList().updateStudentData();
 
     }

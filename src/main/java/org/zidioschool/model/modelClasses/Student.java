@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Student {
     private int id;
+    private String idNumber;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -24,6 +25,13 @@ public class Student {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public String getFirstName() {

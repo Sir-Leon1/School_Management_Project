@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 public class MainUI extends JFrame {
     private static MainUI mainUI;
-
     private JPanel mainPanel;
     private JPanel btnPanel;
     private JPanel tabPanel;

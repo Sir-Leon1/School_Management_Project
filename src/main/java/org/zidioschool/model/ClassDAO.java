@@ -55,6 +55,21 @@ public class ClassDAO {
         return clss;
     }
 
+    public int getClassIdByName(String className) {
+        String query = "SELECT id FROM classes WHERE class_name = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setString(1, className);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public boolean addClass(Clss clss) {
         String query = "INSERT INTO classes (name) VALUES (?)";
 
