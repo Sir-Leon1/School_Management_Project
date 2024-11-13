@@ -35,6 +35,7 @@ public class StudentDAO {
                 student.setGuardianPhone1(resultSet.getString("guardian_phone1"));
                 student.setGuardianPhone2(resultSet.getString("guardian_phone2"));
                 student.setGuardianEmail(resultSet.getString("guardian_email"));
+                student.setIdNumber(resultSet.getString("id_number"));
                 student.setClassId(resultSet.getInt("class_id"));
                 students.add(student);
             }
@@ -100,7 +101,7 @@ public class StudentDAO {
     }
 
     public boolean updateStudent(Student student) {
-        String query = "UPDATE students SET first_name = ?, middle_name = ?, last_name = ?, age = ?, phone1 = ?, phone2 = ?, email = ?, guardian_phone1 = ?, guardian_phone2 = ?, guardian_email = ?, class_id = ? WHERE id = ?";
+        String query = "UPDATE students SET first_name = ?, middle_name = ?, last_name = ?, age = ?, phone1 = ?, phone2 = ?, email = ?, guardian_phone1 = ?, guardian_phone2 = ?, guardian_email = ?, class_id = ?, id_number = ? WHERE id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, student.getFirstName());
@@ -114,7 +115,8 @@ public class StudentDAO {
             statement.setString(9, student.getGuardianPhone2());
             statement.setString(10, student.getGuardianEmail());
             statement.setInt(11, student.getClassId());
-            statement.setInt(12, student.getId());
+            statement.setString(12, student.getIdNumber());
+            statement.setInt(13, student.getId());
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -322,16 +322,10 @@ public class UpdatePanel extends JPanel {
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.deleteStudent(studentInView.getId());
         MainUI.getInstance().getViewList().updateStudentData();
+        MainUI.getInstance().getUpdatePanel().updateStudentData();
 
     }
 
-    //todo Updating to the table does not work
-
-    /**
-     * Fix this by creating a table id as the primary key in the students table
-     * and using id number just as a reference to the student
-     * These changes require you to fix the StudentDAO class and the database
-     */
     private void updateStudent() {
         Clss clss = new Clss();
         studentInView.setFirstName(getFirstName());
@@ -350,6 +344,7 @@ public class UpdatePanel extends JPanel {
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.updateStudent(studentInView);
         MainUI.getInstance().getViewList().updateStudentData();
+        MainUI.getInstance().getUpdatePanel().updateStudentData();
 
     }
 
