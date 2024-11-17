@@ -13,7 +13,7 @@ public class GradientPanel extends JPanel {
         int arcWidth = 30;
         int arcHeight = 30;
 
-        GradientPaint gradient = new GradientPaint(0, 0, new Color(255, 255, 255, 255), 0, height, new Color(255, 255, 255));
+        GradientPaint gradient = new GradientPaint(0, 0, new Color(87, 91, 198, 255), 0, height, new Color(92, 139, 231));
         g2d.setPaint(gradient);
         g2d.fillRoundRect(0, 0, width, height, arcWidth, arcHeight);
     }

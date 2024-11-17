@@ -1,6 +1,5 @@
 package org.zidioschool.userInterface;
 
-import org.zidioschool.Main;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ public class MainUI extends JFrame {
     private ViewList viewList;
     private RegistrationPanel registrationPanel;
     private UpdatePanel updatePanel;
-    private ReportPanel reportPanel;
+    private AboutPanel reportPanel;
 
     private RoundedButton registerBtn;
     private RoundedButton updateBtn;
@@ -26,7 +25,7 @@ public class MainUI extends JFrame {
     public MainUI() {
         setTitle("Zidio School manager");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 850);
+        setSize(1500, 950);
         setLocationRelativeTo(null);
         mainPanel = new JPanel();
         setContentPane(mainPanel);
@@ -51,7 +50,7 @@ public class MainUI extends JFrame {
         registrationPanel = new RegistrationPanel();
         updatePanel = new UpdatePanel();
         viewList = new ViewList();
-        reportPanel = new ReportPanel();
+        reportPanel = new AboutPanel();
 
         tabPanel.add(viewList, "ViewListPanel");
         tabPanel.add(registrationPanel, "RegistrationPanel");

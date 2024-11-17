@@ -189,11 +189,11 @@ public class UpdatePanel extends JPanel {
         // Guardian Email
         label = new JLabel("Guardian Email*");
         setLabelFont(label);
-        constraints = GridBagHelper.createConstraints(0, 10, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
+        constraints = GridBagHelper.createConstraints(0, 10, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, 0, 10, 10, 10);
         add(label, constraints);
 
         guardianEmailField = new RoundedTextField(20, "Guardian Email");
-        constraints = GridBagHelper.createConstraints(1, 10, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
+        constraints = GridBagHelper.createConstraints(1, 10, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.HORIZONTAL, 1, 10, 10, 10);
         add(guardianEmailField, constraints);
 
         lastPanel = new GradientPanel();

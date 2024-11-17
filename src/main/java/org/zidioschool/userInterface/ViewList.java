@@ -3,9 +3,7 @@ import org.zidioschool.model.StudentDAO;
 import org.zidioschool.model.modelClasses.Data;
 import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.services.DataFilter;
-import org.zidioschool.userInterface.customComponents.RoundedPanel;
-import org.zidioschool.userInterface.customComponents.SearchBar;
-import org.zidioschool.userInterface.customComponents.Table;
+import org.zidioschool.userInterface.customComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +17,7 @@ import java.util.List;
 public class ViewList extends JPanel {
     private JPanel viewListPanel;
     private JPanel searchBarPanel;
-    private JPanel lastPanel;
+    private GradientPanel lastPanel;
     private RoundedPanel tablePanel;
     private DataFilter dataFilter;
     private List<Data> dataList;
@@ -28,6 +26,7 @@ public class ViewList extends JPanel {
     private List<Student> students;
     private Table table;
     private Table.StudentsTableModel tableModel;
+    private RoundedButton clearBtn;
 
     public ViewList() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -49,8 +48,15 @@ public class ViewList extends JPanel {
 
         //Creating and adding the search bar
         searchField = new SearchBar(20, students, dataFilter);
-        searchField.setPreferredSize(new Dimension(300, 40));
-        searchBarPanel.add(searchField, BorderLayout.NORTH);
+        searchField.setPreferredSize(new Dimension(250, 40));
+        searchBarPanel.add(searchField, BorderLayout.CENTER);
+
+        clearBtn = new RoundedButton("clear", 150, 40);
+        clearBtn.addActionListener(e -> clearSearchBar());
+        clearBtn.setBackground(new Color(255, 255, 255));
+        clearBtn.setForeground(new Color(0, 0, 0));
+        clearBtn.setPreferredSize(new Dimension(100, 40));
+        searchBarPanel.add(clearBtn, BorderLayout.EAST);
 
         //dataFilter.displayFilteredData();
         add(searchBarPanel, BorderLayout.NORTH);
@@ -71,10 +77,9 @@ public class ViewList extends JPanel {
          * Add clear button for the search bar
          *
          */
-        lastPanel = new JPanel();
+        lastPanel = new GradientPanel();
         lastPanel.setLayout(new BorderLayout());
         lastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        lastPanel.setBackground(Color.GRAY);
         lastPanel.setPreferredSize(new Dimension(300, 100));
         lastPanel.setOpaque(true);
         add(lastPanel, BorderLayout.SOUTH);
@@ -87,6 +92,10 @@ public class ViewList extends JPanel {
         tableModel.fireTableDataChanged();
         dataFilter.setStudent(student);
         searchField.setStudent(student);
+    }
+
+    private void clearSearchBar() {
+        searchField.setText("Search...");
     }
 
     public Table getTable(){
