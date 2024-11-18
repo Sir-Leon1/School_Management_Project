@@ -73,10 +73,6 @@ public class ViewList extends JPanel {
         add(tablePanel, BorderLayout.CENTER);
 
         //TODO Do something with this lastPanel
-        /**
-         * Add clear button for the search bar
-         *
-         */
         lastPanel = new GradientPanel();
         lastPanel.setLayout(new BorderLayout());
         lastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
