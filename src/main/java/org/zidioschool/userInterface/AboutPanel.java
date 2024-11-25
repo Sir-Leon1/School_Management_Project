@@ -172,7 +172,6 @@ public class AboutPanel extends JPanel {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1500, 850);
 
-            // Create an instance of ReportPanel
             AboutPanel reportPanel = new AboutPanel();
 
             // Add the ReportPanel to the frame
