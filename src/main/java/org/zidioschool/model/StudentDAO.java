@@ -46,6 +46,38 @@ public class StudentDAO {
         return students;
     }
 
+    public List<Student> getStudentsByClass(int classId) {
+    List<Student> students = new ArrayList<>();
+    String query = "SELECT * FROM students WHERE class_id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setInt(1, classId);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setMiddleName(resultSet.getString("middle_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setAge(resultSet.getInt("age"));
+                student.setPhone1(resultSet.getString("phone1"));
+                student.setPhone2(resultSet.getString("phone2"));
+                student.setEmail(resultSet.getString("email"));
+                student.setGuardianPhone1(resultSet.getString("guardian_phone1"));
+                student.setGuardianPhone2(resultSet.getString("guardian_phone2"));
+                student.setGuardianEmail(resultSet.getString("guardian_email"));
+                student.setIdNumber(resultSet.getString("id_number"));
+                student.setClassId(resultSet.getInt("class_id"));
+                students.add(student);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return students;
+}
+
     public Student getStudentById(int id) {
         Student student = null;
         String query = "SELECT * FROM students WHERE id = ?";

@@ -1,11 +1,14 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.model.Model;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainUI extends JFrame {
     private static MainUI mainUI;
@@ -24,7 +27,7 @@ public class MainUI extends JFrame {
 
     public MainUI() {
         setTitle("Zidio School manager");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setSize(1500, 950);
         setLocationRelativeTo(null);
         mainPanel = new JPanel();
@@ -85,6 +88,13 @@ public class MainUI extends JFrame {
             }
         });
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeApp();
+            }
+        });
+
         setVisible(true);
     }
 
@@ -105,5 +115,10 @@ public class MainUI extends JFrame {
 
     public UpdatePanel getUpdatePanel() {
         return updatePanel;
+    }
+
+    private void closeApp() {
+        Model.getInstance().getDatabaseDriver().closeConnection();
+        System.exit(0);
     }
 }

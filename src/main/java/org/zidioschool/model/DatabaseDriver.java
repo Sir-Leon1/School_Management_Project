@@ -37,6 +37,7 @@ public class DatabaseDriver {
     public void closeConnection() {
         try {
             if (connection != null) connection.close();
+            System.out.println("Database connection closed");
         } catch (SQLException e) {
             System.out.println("Error occured in closing connection: " +e);
             e.printStackTrace();

@@ -1,5 +1,8 @@
 package org.zidioschool.userInterface;
 
+import org.zidioschool.model.ClassDAO;
+import org.zidioschool.model.modelClasses.Clss;
+import org.zidioschool.services.pdfGenerator.PdfReportGenerator;
 import org.zidioschool.userInterface.customComponents.DropDownBox;
 import org.zidioschool.userInterface.customComponents.GradientPanel;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
@@ -8,6 +11,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.io.File;
+import java.util.List;
 
 public class AboutPanel extends JPanel {
     private JLabel label;
@@ -32,20 +37,25 @@ public class AboutPanel extends JPanel {
         add(label, constraints);
 
         downloadBtn = new RoundedButton("Download", 125, 25);
+        downloadBtn.addActionListener(e -> {
+            downloadClassPdf();
+        });
         constraints = GridBagHelper.createConstraints(2, 1,
                 GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
                 1, 0, 10, 10);
         add(downloadBtn, constraints);
 
-        //TODO: Convert options to a list of classes avaialable in the database
-        String[] options = {"Math", "Science", "History", "Art"};
-        dropDownBox = new DropDownBox<>(options);
+        List<Clss> options = new ClassDAO().getAllClasses();
+        String[] classNames = options.stream()
+                .map(Clss::getClassName)
+                .toArray(String[]::new);
+        dropDownBox = new DropDownBox<>(classNames);
         constraints = GridBagHelper.createConstraints(1, 1,
                 GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
                 1, 0, 10, 10);
         add(dropDownBox, constraints);
 
-        label = new JLabel("Download School info");
+        label = new JLabel("Download School Register");
         setLabelFont(label);
         constraints = GridBagHelper.createConstraints(0, 2,
                 GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE,
@@ -53,6 +63,9 @@ public class AboutPanel extends JPanel {
         add(label, constraints);
 
         downloadBtn2 = new RoundedButton("Download", 125, 25);
+        downloadBtn2.addActionListener(e -> {
+            downloadSchlRegister();
+        });
         constraints = GridBagHelper.createConstraints(2, 2,
                 GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
                 1, 0, 10, 10);
@@ -61,7 +74,9 @@ public class AboutPanel extends JPanel {
         lastPanel = new GradientPanel();
         lastPanel.setLayout(new GridBagLayout());
         lastPanel.setForeground(Color.WHITE);
-        constraints = UpdatePanel.GridBagHelper.createConstraints(0, 11, GridBagConstraints.CENTER, GridBagConstraints.BOTH, 0, 0, 10, 10);
+        constraints = UpdatePanel.GridBagHelper.createConstraints(0, 11,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                0, 0, 10, 10);
         constraints.gridwidth = 3;
         add(lastPanel, constraints);
 
@@ -74,42 +89,42 @@ public class AboutPanel extends JPanel {
         lastPanel.add(label, constraints);
 
         label = new JLabel("Developer: Gunnah Leon");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(0, 3,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 0, 0);
         lastPanel.add(label, constraints);
 
         label = new JLabel("Contact: sir-Leon1@gmail.com");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(0, 4,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 0, 0);
         lastPanel.add(label, constraints);
 
         label = new JLabel("License: MIT");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(0, 5,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 0, 0);
         lastPanel.add(label, constraints);
 
         label = new JLabel("Version: 1.0");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(0, 6,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 0, 0);
         lastPanel.add(label, constraints);
 
         label = new JLabel("Copyright (c) 2016 Zidio School");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(0, 7,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 0, 0);
         lastPanel.add(label, constraints);
 
         label = new JLabel("Generate application report below");
-        setLabelFont(label, 18);
+        setLabelFont(label, 15);
         constraints = GridBagHelper.createConstraints(1, 3,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 10, 10);
@@ -118,6 +133,9 @@ public class AboutPanel extends JPanel {
         downloadBtn3 = new RoundedButton("Download", 125, 25);
         downloadBtn3.setBackground(new Color(255, 255, 255));
         downloadBtn3.setForeground(new Color(0, 0, 0));
+        downloadBtn3.addActionListener(e -> {
+            downloadAppReport();
+        });
         constraints = GridBagHelper.createConstraints(1, 4,
                 GridBagConstraints.NORTH, GridBagConstraints.NONE,
                 1, 0, 10, 10);
@@ -132,6 +150,40 @@ public class AboutPanel extends JPanel {
     private void setLabelFont(JLabel label, int size) {
         label.setFont(new Font("Grauda", Font.BOLD, size));
         label.setForeground(new Color(255, 255, 255));
+    }
+
+    private void downloadClassPdf() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Output Path");
+
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                PdfReportGenerator.generateStudentsByClass(String.valueOf(dropDownBox.getSelectedItem()),
+                        selectedFile.getAbsolutePath());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    private void downloadSchlRegister() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Output Path");
+
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                PdfReportGenerator.generateAllStudentsReport(selectedFile.getAbsolutePath());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    private void downloadAppReport() {
+        // TODO Generates a pdf from the main README.md of this repository on github
+
     }
 
     public class GridBagHelper {

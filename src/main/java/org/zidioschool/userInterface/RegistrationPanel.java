@@ -221,7 +221,6 @@ public class RegistrationPanel extends JPanel {
                 || Objects.equals(getAge(), "eg..12")
                 || Objects.equals(getClassField(), "eg..Chicago")
                 || Objects.equals(getPhone1(), "eg..0712345678")
-                || Objects.equals(getPhone2(), "eg..0712345678")
                 || Objects.equals(getGuardianPhone1(), "eg..0788721657")
                 || Objects.equals(getGuardianEmail(), "eg..guardian@vilettech.mail.com")) {
             JOptionPane.showMessageDialog(this, "Please fill in all the required fields marked with *.", "Incomplete Details", JOptionPane.WARNING_MESSAGE);
