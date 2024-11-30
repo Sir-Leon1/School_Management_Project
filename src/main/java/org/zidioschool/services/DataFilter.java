@@ -30,12 +30,12 @@ public class DataFilter {
         if (searchText.isEmpty()) {
             filteredDataList = dataList;
         } else {
-            //TODO: Modify this to also search by id number of student
             List<Clss> classes = new ClassDAO().getAllClasses();
             filteredDataList = dataList.stream()
                     .filter(d -> d.getFirstName().toLowerCase().contains(searchText) ||
                             d.getLastName().toLowerCase().contains(searchText) ||
                             d.getPhone1().contains(searchText) ||
+                            d.getIdNumber().contains(searchText) ||
                             d.getMiddleName().contains(searchText) ||
                             d.getClassName(classes).toLowerCase().contains(searchText))
                     .collect(Collectors.toList());

@@ -32,6 +32,19 @@ public class RegistrationPanel extends JPanel {
     private RoundedTextField guardianEmailField;
     private GradientPanel lastPanel;
 
+    String firstNameExample = "eg..John";
+    String middleNameExample = "eg..Doe";
+    String lastNameExample = "eg..Smith";
+    String idNumberExample = "eg..123456";
+    String ageExample = "eg..12";
+    String classExample = "eg..Chicago";
+    String phone1Example = "eg..0712345678";
+    String phone2Example = "eg..0712345678";
+    String emailExample = "eg..john@vilettech.mail.com";
+    String guardianPhone1Example = "eg..0788721657";
+    String guardianPhone2Example = "eg..0788721657";
+    String guardianEmailExample = "eg..guardian@vilettech.mail.com";
+
     public RegistrationPanel() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         Border inner = BorderFactory.createTitledBorder("Registration");
@@ -51,7 +64,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 1, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        firstNameField = new RoundedTextField(20, "eg..John");
+        firstNameField = new RoundedTextField(20, firstNameExample);
         constraints = GridBagHelper.createConstraints(1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(firstNameField, constraints);
 
@@ -61,7 +74,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        middleNameField = new RoundedTextField(20, "eg..Doe");
+        middleNameField = new RoundedTextField(20, middleNameExample);
         constraints = GridBagHelper.createConstraints(3, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(middleNameField, constraints);
 
@@ -71,7 +84,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(4, 1, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        lastNameField = new RoundedTextField(20, "eg..Smith");
+        lastNameField = new RoundedTextField(20, lastNameExample);
         constraints = GridBagHelper.createConstraints(5, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(lastNameField, constraints);
 
@@ -81,7 +94,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 2, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        idNumberField = new RoundedTextField(20, "eg..123456");
+        idNumberField = new RoundedTextField(20, idNumberExample);
         constraints = GridBagHelper.createConstraints(1, 2, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(idNumberField, constraints);
 
@@ -91,7 +104,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 3, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        ageField = new RoundedTextField(20, "eg..12");
+        ageField = new RoundedTextField(20, ageExample);
         constraints = GridBagHelper.createConstraints(1, 3, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(ageField, constraints);
 
@@ -101,7 +114,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(2, 3, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        classField = new RoundedTextField(20, "eg..Chicago");
+        classField = new RoundedTextField(20, classExample);
         constraints = GridBagHelper.createConstraints(3, 3, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(classField, constraints);
 
@@ -116,7 +129,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 5, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        phone1Field = new RoundedTextField(20, "eg..0712345678");
+        phone1Field = new RoundedTextField(20, phone1Example);
         constraints = GridBagHelper.createConstraints(1, 5, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(phone1Field, constraints);
 
@@ -126,7 +139,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(2, 5, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        phone2Field = new RoundedTextField(20, "eg..0712345678");
+        phone2Field = new RoundedTextField(20, phone2Example);
         constraints = GridBagHelper.createConstraints(3, 5, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(phone2Field, constraints);
 
@@ -136,7 +149,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 6, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        emailField = new RoundedTextField(20, "eg..john@vilettech.mail.com");
+        emailField = new RoundedTextField(20, emailExample);
         constraints = GridBagHelper.createConstraints(1, 6, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(emailField, constraints);
 
@@ -146,7 +159,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 7, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        guardianPhone1Field = new RoundedTextField(20, "eg..0788721657");
+        guardianPhone1Field = new RoundedTextField(20, guardianPhone1Example);
         constraints = GridBagHelper.createConstraints(1, 7, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(guardianPhone1Field, constraints);
 
@@ -156,7 +169,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(2, 7, GridBagConstraints.WEST, GridBagConstraints.NONE, 0, 0, 10, 10);
         add(label, constraints);
 
-        guardianPhone2Field = new RoundedTextField(20, "eg..0788721657");
+        guardianPhone2Field = new RoundedTextField(20, guardianPhone2Example);
         constraints = GridBagHelper.createConstraints(3, 7, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, 1, 0, 10, 10);
         add(guardianPhone2Field, constraints);
 
@@ -166,7 +179,7 @@ public class RegistrationPanel extends JPanel {
         constraints = GridBagHelper.createConstraints(0, 9, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, 0, 1, 10, 10);
         add(label, constraints);
 
-        guardianEmailField = new RoundedTextField(20, "eg..guardian@vilettech.mail.com");
+        guardianEmailField = new RoundedTextField(20, guardianEmailExample);
         constraints = GridBagHelper.createConstraints(1, 9, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.HORIZONTAL, 1, 1, 10, 10);
         add(guardianEmailField, constraints);
 
@@ -200,38 +213,53 @@ public class RegistrationPanel extends JPanel {
     }
 
     private void clearFields() {
-        firstNameField.setText("eg..John");
-        middleNameField.setText("eg..Doe");
-        lastNameField.setText("eg..Smith");
-        idNumberField.setText("eg..123456");
-        ageField.setText("eg..12");
-        classField.setText("eg..Chicago");
-        phone1Field.setText("eg..0712345678");
-        phone2Field.setText("eg..0712345678");
-        emailField.setText("eg..john@vilettech.mail.com");
-        guardianPhone1Field.setText("eg..0788721657");
-        guardianPhone2Field.setText("eg..0788721657");
-        guardianEmailField.setText("eg..guardian@vilettech.mail.com");
+        firstNameField.setText(firstNameExample);
+        middleNameField.setText(middleNameExample);
+        lastNameField.setText(lastNameExample);
+        idNumberField.setText(idNumberExample);
+        ageField.setText(ageExample);
+        classField.setText(classExample);
+        phone1Field.setText(phone1Example);
+        phone2Field.setText(phone2Example);
+        emailField.setText(emailExample);
+        guardianPhone1Field.setText(guardianPhone1Example);
+        guardianPhone2Field.setText(guardianPhone2Example);
+        guardianEmailField.setText(guardianEmailExample);
     }
 
     private void validateAndShowConfirmationDialog() {
-        if (Objects.equals(getFirstName(), "eg..John")
-                || Objects.equals(getLastName(), "eg..Smith")
-                || Objects.equals(getIdNumber(), "eg..123456")
-                || Objects.equals(getAge(), "eg..12")
-                || Objects.equals(getClassField(), "eg..Chicago")
-                || Objects.equals(getPhone1(), "eg..0712345678")
-                || Objects.equals(getGuardianPhone1(), "eg..0788721657")
-                || Objects.equals(getGuardianEmail(), "eg..guardian@vilettech.mail.com")) {
+        if (Objects.equals(firstNameField.getText(), firstNameExample)
+                || Objects.equals(lastNameField.getText(), lastNameExample)
+                || Objects.equals(idNumberField.getText(), idNumberExample)
+                || Objects.equals(ageField.getText(), ageExample)
+                || Objects.equals(classField.getText(), classExample)
+                || Objects.equals(phone1Field.getText(), phone1Example)
+                || Objects.equals(guardianPhone1Field.getText(), guardianPhone1Example)
+                || Objects.equals(guardianEmailField.getText(), guardianEmailExample)) {
             JOptionPane.showMessageDialog(this, "Please fill in all the required fields marked with *.", "Incomplete Details", JOptionPane.WARNING_MESSAGE);
         } else {
+
+            if (Objects.equals(middleNameField.getText(), middleNameExample)) {
+                middleNameField.setText("");
+            }
+            if (Objects.equals(phone2Field.getText(), phone2Example)) {
+                phone2Field.setText("");
+            }
+            if (Objects.equals(emailField.getText(), emailExample)) {
+                emailField.setText("");
+            }
+            if (Objects.equals(guardianPhone2Field.getText(), guardianPhone2Example)) {
+                guardianPhone2Field.setText("");
+            }
+
             showConfirmationDialog();
         }
     } //todo handle the confirmation dialog to set not * field values to null if not given by the user
+
     private void showConfirmationDialog() {
         String message = String.format(
                 "First Name: %s\nMiddle Name: %s\nLast Name: %s\nID Number: %s\nAge: %s\nClass: %s\nPhone1: %s\nPhone2: %s\nEmail: %s\nGuardian Phone1: %s\nGuardian Phone2: %s\nGuardian Email: %s",
-                getFirstName(), getMiddleName(), getLastName(), getIdNumber(), getAge(), getClassField(), getPhone1(), getPhone2(), getEmail(), getGuardianPhone1(), getGuardianPhone2(), getGuardianEmail()
+                firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), idNumberField.getText(), ageField.getText(), classField.getText(), phone1Field.getText(), phone2Field.getText(), emailField.getText(), guardianPhone1Field.getText(), guardianPhone2Field.getText(), guardianEmailField.getText()
         );
 
         int option = JOptionPane.showConfirmDialog(this, message, "Confirm Details", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -244,71 +272,23 @@ public class RegistrationPanel extends JPanel {
 
     private void registerStudent() {
         Student student = new Student();
-        student.setFirstName(getFirstName());
-        student.setMiddleName(getMiddleName());
-        student.setLastName(getLastName());
-        student.setIdNumber(getIdNumber());
-        student.setAge(Integer.parseInt(getAge()));
-        student.setClassId(new ClassDAO().getClassIdByName(getClassField()));
-        student.setPhone1(getPhone1());
-        student.setPhone2(getPhone2());
-        student.setEmail(getEmail());
-        student.setGuardianPhone1(getGuardianPhone1());
-        student.setGuardianPhone2(getGuardianPhone2());
-        student.setGuardianEmail(getGuardianEmail());
+        student.setFirstName(firstNameField.getText());
+        student.setMiddleName(middleNameField.getText());
+        student.setLastName(lastNameField.getText());
+        student.setIdNumber(idNumberField.getText());
+        student.setAge(Integer.parseInt(ageField.getText()));
+        student.setClassId(new ClassDAO().getClassIdByName(classField.getText()));
+        student.setPhone1(phone1Field.getText());
+        student.setPhone2(phone2Field.getText());
+        student.setEmail(emailField.getText());
+        student.setGuardianPhone1(guardianPhone1Field.getText());
+        student.setGuardianPhone2(guardianPhone2Field.getText());
+        student.setGuardianEmail(guardianEmailField.getText());
 
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.addStudent(student);
         MainUI.getInstance().getViewList().updateStudentData();
         MainUI.getInstance().getUpdatePanel().updateStudentData();
-    }
-
-    public String getFirstName() {
-        return firstNameField.getText();
-    }
-
-    public String getMiddleName() {
-        return middleNameField.getText();
-    }
-
-    public String getLastName() {
-        return lastNameField.getText();
-    }
-
-    public String getIdNumber() {
-        return idNumberField.getText();
-    }
-
-    public String getAge() {
-        return ageField.getText();
-    }
-
-    public String getClassField() {
-        return classField.getText();
-    }
-
-    public String getPhone1() {
-        return phone1Field.getText();
-    }
-
-    public String getPhone2() {
-        return phone2Field.getText();
-    }
-
-    public String getEmail() {
-        return emailField.getText();
-    }
-
-    public String getGuardianPhone1() {
-        return guardianPhone1Field.getText();
-    }
-
-    public String getGuardianPhone2() {
-        return guardianPhone2Field.getText();
-    }
-
-    public String getGuardianEmail() {
-        return guardianEmailField.getText();
     }
 
     public class GridBagHelper {

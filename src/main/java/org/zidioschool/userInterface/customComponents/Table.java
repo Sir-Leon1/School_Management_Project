@@ -98,6 +98,14 @@ public class Table extends JScrollPane {
                         }
                     }
 
+                    /**
+                     * Handles the mouse released event.
+                     * This method is responsible for handling the actions when the mouse button is released.
+                     * It checks if the button was pressed, repaints the table, and handles button clicks
+                     * only if it's the last column.
+                     *
+                     * @param e the MouseEvent triggered when the mouse button is released
+                     */
                     @Override
                     public void mouseReleased(MouseEvent e) {
                         if (isPressed) {
@@ -158,6 +166,7 @@ public class Table extends JScrollPane {
                     student.add(students.get(rowIndex));
                     MainUI.getInstance().getUpdatePanel().updateFieldsWithStudentData(student);
                     MainUI.getInstance().switchPanel("UpdatePanel");
+                    MainUI.getInstance().getViewList().clearSearchBar();
                     return students.get(rowIndex);
                 } else {
                     return null;
@@ -166,6 +175,7 @@ public class Table extends JScrollPane {
         });
 
         setViewportView(table);
+        setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder());
         getViewport().setBackground(Color.WHITE);
     }

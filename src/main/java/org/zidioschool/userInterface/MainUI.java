@@ -35,6 +35,7 @@ public class MainUI extends JFrame {
         mainPanel.setLayout(new BorderLayout());
 
         btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        btnPanel.setBackground(Color.DARK_GRAY);
         registerBtn = new RoundedButton("Register", 200, 60);
         updateBtn = new RoundedButton("Update", 200, 60);
         viewListBtn = new RoundedButton("View List", 200, 60);
@@ -47,7 +48,7 @@ public class MainUI extends JFrame {
         add(btnPanel, BorderLayout.NORTH);
 
         tabPanel = new JPanel(new CardLayout());
-        tabPanel.setBackground(Color.WHITE);
+        tabPanel.setBackground(Color.DARK_GRAY);
         mainPanel.add(tabPanel);
 
         registrationPanel = new RegistrationPanel();

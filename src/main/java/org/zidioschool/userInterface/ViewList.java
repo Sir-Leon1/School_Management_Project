@@ -1,4 +1,5 @@
 package org.zidioschool.userInterface;
+
 import org.zidioschool.model.StudentDAO;
 import org.zidioschool.model.modelClasses.Data;
 import org.zidioschool.model.modelClasses.Student;
@@ -11,6 +12,7 @@ import java.awt.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,16 +32,17 @@ public class ViewList extends JPanel {
 
     public ViewList() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-        Border inner = BorderFactory.createTitledBorder("Home");
+        Border inner = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Home");
+        ((TitledBorder) inner).setTitleColor(Color.WHITE);
         setBorder(new CompoundBorder(outer, inner));
         setLayout(new BorderLayout(15, 15));
-        setBackground(Color.WHITE);
+        setBackground(Color.DARK_GRAY);
 
         //Design for the search bar mainPanel
         searchBarPanel = new JPanel();
         searchBarPanel.setLayout(new BorderLayout());
         searchBarPanel.setBorder(new EmptyBorder(0, 150, 0, 150));
-        searchBarPanel.setBackground(Color.WHITE);
+        searchBarPanel.setBackground(Color.DARK_GRAY);
 
         //Retreives data from the database and creates an instance of the stdt-table model
         students = new StudentDAO().getAllStudents();
@@ -69,7 +72,7 @@ public class ViewList extends JPanel {
         tablePanel.setPreferredSize(new Dimension(300, 300));
 
         table = new Table(tableModel);
-        tablePanel.add(table, BorderLayout.NORTH);
+        tablePanel.add(table, BorderLayout.CENTER);
         add(tablePanel, BorderLayout.CENTER);
 
         //TODO Do something with this lastPanel
@@ -81,7 +84,7 @@ public class ViewList extends JPanel {
         add(lastPanel, BorderLayout.SOUTH);
     }
 
-    public void updateStudentData(){
+    public void updateStudentData() {
         List<Student> student = new StudentDAO().getAllStudents();
         this.students = student;
         tableModel.setStudent(student);
@@ -90,11 +93,11 @@ public class ViewList extends JPanel {
         searchField.setStudent(student);
     }
 
-    private void clearSearchBar() {
+    public void clearSearchBar() {
         searchField.setText("Search...");
     }
 
-    public Table getTable(){
+    public Table getTable() {
         return table;
     }
 
