@@ -4,26 +4,40 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GradientPanel extends JPanel {
+    private final int cornerRadius = 20;
+    private final Color borderColor = Color.GRAY;
+    private final int borderThickness = 3;
+    private final Color gradientStartColor = new Color(87, 91, 198, 255);
+    private final Color gradientEndColor = new Color(92, 139, 231);
+
+    public GradientPanel() {
+        setOpaque(false); // Allows rounded edges by making the panel background transparent
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        int width = getWidth();
-        int height = getHeight();
-        int arcWidth = 30;
-        int arcHeight = 30;
+        Graphics2D g2 = (Graphics2D) g;
 
-        GradientPaint gradient = new GradientPaint(0, 0, new Color(87, 91, 198, 255), 0, height, new Color(92, 139, 231));
-        g2d.setPaint(gradient);
-        g2d.fillRoundRect(0, 0, width, height, arcWidth, arcHeight);
+        // Enable anti-aliasing for smoother edges
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Draw gradient background
+        GradientPaint gradient = new GradientPaint(0, 0, gradientStartColor, 0, getHeight(), gradientEndColor);
+        g2.setPaint(gradient);
+        g2.fillRoundRect(
+                borderThickness / 2,
+                borderThickness / 2,
+                getWidth() - borderThickness,
+                getHeight() - borderThickness,
+                cornerRadius,
+                cornerRadius
+        );
+
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Gradient Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.add(new GradientPanel());
-        frame.setVisible(true);
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(200, 100); // Default size, can be customized
     }
 }
