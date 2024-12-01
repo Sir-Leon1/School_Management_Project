@@ -80,7 +80,6 @@ public class ViewList extends JPanel {
         lastPanel.setLayout(new BorderLayout());
         lastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         lastPanel.setPreferredSize(new Dimension(300, 100));
-        lastPanel.setOpaque(true);
         add(lastPanel, BorderLayout.SOUTH);
     }
 

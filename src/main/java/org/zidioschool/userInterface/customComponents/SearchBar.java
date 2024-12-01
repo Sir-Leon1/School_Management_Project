@@ -30,6 +30,7 @@ public class SearchBar extends JTextField {
         setText("Search...");
         setForeground(Color.GRAY);
         setFont(new Font("Grauda", Font.PLAIN, 16));
+        setBackground(Color.WHITE);
 
         getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -75,7 +76,7 @@ public class SearchBar extends JTextField {
                 isClicked = false;
                 if (getText().isEmpty()) {
                     setText("Search...");
-                    setForeground(Color.GRAY);
+                    setForeground(Color.BLACK);
                 }
             }
         });
@@ -94,7 +95,7 @@ public class SearchBar extends JTextField {
             public void mouseExited(MouseEvent e) {
                 if (!isClicked && getText().isEmpty()) {
                     setText("Search...");
-                    setForeground(Color.GRAY);
+                    setForeground(Color.BLACK);
                 }
             }
         });
@@ -104,6 +105,7 @@ public class SearchBar extends JTextField {
                 new RoundedCornerBorder(),
                 new EmptyBorder(0, 10, 0, 10)
         ));
+        setOpaque(false);
     }
 
     public List<Student> getFilteredDataList() {
@@ -124,7 +126,8 @@ public class SearchBar extends JTextField {
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(Color.LIGHT_GRAY);
+            g2.setColor(Color.WHITE);
+            //g2.fillRoundRect(0, 0, width, height, 15, 15);
             g2.drawRoundRect(x, y, width - 1, height - 1, 15, 15); // Rounded rectangle
         }
     }
