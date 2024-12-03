@@ -13,10 +13,11 @@ import java.awt.event.WindowEvent;
 public class MainUI extends JFrame {
     private static MainUI mainUI;
     private JPanel mainPanel;
+    private LoginPanel loginPanel;
     private JPanel btnPanel;
     private JPanel tabPanel;
     private ViewList viewList;
-    private RegistrationPanel registrationPanel;
+    private NewStudentPanel registrationPanel;
     private UpdatePanel updatePanel;
     private AboutPanel reportPanel;
 
@@ -34,8 +35,11 @@ public class MainUI extends JFrame {
         setContentPane(mainPanel);
         mainPanel.setLayout(new BorderLayout());
 
+        loginPanel = new LoginPanel();
+        mainPanel.add(loginPanel, BorderLayout.CENTER);
+
         btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        registerBtn = new RoundedButton("Register", 200, 60);
+        registerBtn = new RoundedButton("+ New Student", 200, 60);
         updateBtn = new RoundedButton("Update", 200, 60);
         viewListBtn = new RoundedButton("View List", 200, 60);
         generateReportBtn = new RoundedButton("Generate Report", 200, 60);
@@ -44,13 +48,11 @@ public class MainUI extends JFrame {
         btnPanel.add(updateBtn);
         btnPanel.add(registerBtn);
         btnPanel.add(generateReportBtn);
-        add(btnPanel, BorderLayout.NORTH);
 
         tabPanel = new JPanel(new CardLayout());
         tabPanel.setBackground(Color.WHITE);
-        mainPanel.add(tabPanel);
 
-        registrationPanel = new RegistrationPanel();
+        registrationPanel = new NewStudentPanel();
         updatePanel = new UpdatePanel();
         viewList = new ViewList();
         reportPanel = new AboutPanel();
@@ -115,6 +117,15 @@ public class MainUI extends JFrame {
 
     public UpdatePanel getUpdatePanel() {
         return updatePanel;
+    }
+
+    public void showMainUI() {
+        mainPanel.remove(loginPanel);
+        mainPanel.add(tabPanel, BorderLayout.CENTER);
+        mainPanel.add(btnPanel, BorderLayout.NORTH);
+        mainPanel.revalidate(); // Refresh the UI
+        mainPanel.repaint(); // Refresh the UI
+        add(btnPanel, BorderLayout.NORTH);
     }
 
     private void closeApp() {
