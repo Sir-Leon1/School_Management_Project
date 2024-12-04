@@ -10,6 +10,12 @@ Zidio School Manager is a Java-based application designed to manage school opera
 - **View Student List**: Display a list of all registered students.
 - **Generate Reports**: Create PDF reports for class lists, school registers, and application reports.
 
+## Screenshots
+![Main UI Screenshot](src/main/resources/App_screenshots/Screenshot from 2024-12-04 13-57-25.png)
+![Main UI Screenshot](src/main/resources/App_screenshots/Screenshot from 2024-12-04 13-55-21.png)
+![Main UI Screenshot](src/main/resources/App_screenshots/Screenshot from 2024-12-04 13-55-26.png)
+
+
 ## Technologies Used
 
 - **Java**: Core programming language.
