@@ -1,52 +1,66 @@
 package org.zidioschool.userInterface;
 
 import org.zidioschool.services.Login;
-import org.zidioschool.userInterface.customComponents.RoundedButton;
-import org.zidioschool.userInterface.customComponents.RoundedPanel;
-import org.zidioschool.userInterface.customComponents.RoundedPasswordField;
-import org.zidioschool.userInterface.customComponents.RoundedTextField;
+import org.zidioschool.userInterface.customComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPanel extends RoundedPanel {
+public class LoginPanel extends GradientPanel {
+    private RoundedPanel infoPanel;
     private RoundedTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
     private Login loginLogic;
+    private GridBagConstraints gbc;
 
     public LoginPanel() {
-        super(20, Color.GRAY, Color.WHITE, 2);
+
         setLayout(new GridBagLayout());
         loginLogic = new Login();
+        gbc = new GridBagConstraints();
+
+        infoPanel = new RoundedPanel(20, Color.GRAY, Color.WHITE, 2);
+        infoPanel.setLayout(new GridBagLayout());
+        gbc = GridBagHelper.createConstraints(0, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(infoPanel, gbc);
 
         // Welcome label
         JLabel welcomeLabel = new JLabel("Welcome to Zidio School");
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        add(welcomeLabel, GridBagHelper.createConstraints(0, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        gbc = GridBagHelper.createConstraints(0, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        infoPanel.add(welcomeLabel, gbc);
 
         // Username label
-        JLabel usernameLabel = new JLabel("Username:");
-        add(usernameLabel, GridBagHelper.createConstraints(0, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        JLabel usernameLabel = new JLabel("Email:");
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc = GridBagHelper.createConstraints(0, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(usernameLabel, gbc);
 
         // Username field
-        usernameField = new RoundedTextField(20, "username");
-        add(usernameField, GridBagHelper.createConstraints(0, 2, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        usernameField = new RoundedTextField(20, "email");
+        usernameField.setForeground(Color.WHITE);
+        gbc = GridBagHelper.createConstraints(0, 2, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(usernameField, gbc);
 
         // Password label
         JLabel passwordLabel = new JLabel("Password:");
-        add(passwordLabel, GridBagHelper.createConstraints(0, 3, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc = GridBagHelper.createConstraints(0, 3, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(passwordLabel, gbc);
 
         // Password field
         passwordField = new RoundedPasswordField(20);
         passwordField.setText("Password");
-        add(passwordField, GridBagHelper.createConstraints(0, 4, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        gbc = GridBagHelper.createConstraints(0, 4, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(passwordField, gbc);
 
         // Login button
         loginButton = new RoundedButton("Login", 150, 40);
         loginButton.addActionListener(e -> authenticateUser());
-        add(loginButton, GridBagHelper.createConstraints(0, 5, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        gbc = GridBagHelper.createConstraints(0, 5, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(loginButton, gbc);
 
         // Register button
         registerButton = new RoundedButton("Register", 150, 40);
@@ -58,7 +72,8 @@ public class LoginPanel extends RoundedPanel {
             frame.add(new RegistrationPanel());
             frame.setVisible(true);
         });
-        add(registerButton, GridBagHelper.createConstraints(0, 6, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10));
+        gbc = GridBagHelper.createConstraints(0, 6, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, 0, 0, 10, 10);
+        add(registerButton, gbc);
     }
 
     private void authenticateUser() {
@@ -88,7 +103,7 @@ public class LoginPanel extends RoundedPanel {
             return constraints;
         }
 
-        //Overload method to have custom weight or anchor if needed
+        // Overload method to have custom weight or anchor if needed
         public static GridBagConstraints createConstraints(int gridx, int gridy, int anchor, int fill, double weightx, double weighty, int ipadx, int ipady) {
             GridBagConstraints constraints = createConstraints(gridx, gridy);
             constraints.anchor = anchor;

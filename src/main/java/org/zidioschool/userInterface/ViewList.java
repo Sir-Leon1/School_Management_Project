@@ -69,7 +69,7 @@ public class ViewList extends JPanel {
         tablePanel.setPreferredSize(new Dimension(300, 300));
 
         table = new Table(tableModel);
-        tablePanel.add(table, BorderLayout.NORTH);
+        tablePanel.add(table, BorderLayout.CENTER);
         add(tablePanel, BorderLayout.CENTER);
 
         //TODO Do something with this lastPanel

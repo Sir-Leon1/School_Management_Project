@@ -24,12 +24,12 @@ public class MainUI extends JFrame {
     private RoundedButton registerBtn;
     private RoundedButton updateBtn;
     private RoundedButton viewListBtn;
-    private RoundedButton generateReportBtn;
+    private RoundedButton aboutBtn;
 
     public MainUI() {
         setTitle("Zidio School manager");
 
-        setSize(1500, 950);
+        setSize(700, 500);
         setLocationRelativeTo(null);
         mainPanel = new JPanel();
         setContentPane(mainPanel);
@@ -39,18 +39,19 @@ public class MainUI extends JFrame {
         mainPanel.add(loginPanel, BorderLayout.CENTER);
 
         btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        btnPanel.setBackground(Color.DARK_GRAY);
         registerBtn = new RoundedButton("+ New Student", 200, 60);
         updateBtn = new RoundedButton("Update", 200, 60);
         viewListBtn = new RoundedButton("View List", 200, 60);
-        generateReportBtn = new RoundedButton("Generate Report", 200, 60);
+        aboutBtn = new RoundedButton("Downloads", 200, 60);
 
         btnPanel.add(viewListBtn);
         btnPanel.add(updateBtn);
         btnPanel.add(registerBtn);
-        btnPanel.add(generateReportBtn);
+        btnPanel.add(aboutBtn);
 
         tabPanel = new JPanel(new CardLayout());
-        tabPanel.setBackground(Color.WHITE);
+        tabPanel.setBackground(Color.DARK_GRAY);
 
         registrationPanel = new NewStudentPanel();
         updatePanel = new UpdatePanel();
@@ -83,7 +84,7 @@ public class MainUI extends JFrame {
             }
         });
 
-        generateReportBtn.addActionListener(new ActionListener() {
+        aboutBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchPanel("ReportPanel");
@@ -121,6 +122,8 @@ public class MainUI extends JFrame {
 
     public void showMainUI() {
         mainPanel.remove(loginPanel);
+        mainUI.setSize(1500, 950);
+        mainUI.setLocationRelativeTo(null);
         mainPanel.add(tabPanel, BorderLayout.CENTER);
         mainPanel.add(btnPanel, BorderLayout.NORTH);
         mainPanel.revalidate(); // Refresh the UI

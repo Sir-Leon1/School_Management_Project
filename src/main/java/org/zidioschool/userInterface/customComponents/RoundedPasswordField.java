@@ -12,6 +12,9 @@ public class RoundedPasswordField extends JPasswordField {
                 new RoundedCornerBorder(),
                 new EmptyBorder(0, 10, 0, 10)
         ));
+        setFont(new Font("Grauda", Font.PLAIN, 16));
+        setForeground(Color.WHITE);
+        setOpaque(false);
     }
 
     private static class RoundedCornerBorder extends MatteBorder {

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 
 public class RoundedTextField extends JTextField {
     private boolean isClicked = false;
+    private Color placeholderColor;
 
     public RoundedTextField(int columns, String placeholder) {
         super(columns);
@@ -19,7 +20,13 @@ public class RoundedTextField extends JTextField {
         setText(placeholder);
         setForeground(Color.GRAY);
         setFont(new Font("Grauda", Font.PLAIN, 16));
+        setOpaque(false);
 
+        if (placeholder == "email") {
+            placeholderColor = Color.WHITE;
+        } else {
+            placeholderColor = Color.LIGHT_GRAY;
+        }
 
         // Add a focus listener to handle placeholder text
         addFocusListener(new FocusAdapter() {
@@ -37,7 +44,7 @@ public class RoundedTextField extends JTextField {
                 isClicked = false;
                 if (getText().isEmpty()) {
                     setText(placeholder);
-                    setForeground(Color.GRAY);
+                    setForeground(placeholderColor);
                 }
             }
         });
@@ -56,7 +63,7 @@ public class RoundedTextField extends JTextField {
             public void mouseExited(MouseEvent e) {
                 if (!isClicked && getText().isEmpty()) {
                     setText(placeholder);
-                    setForeground(Color.GRAY);
+                    setForeground(placeholderColor);
                 }
             }
         });

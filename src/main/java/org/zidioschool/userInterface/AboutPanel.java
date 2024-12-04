@@ -13,6 +13,7 @@ import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
+import javax.swing.border.TitledBorder;
 
 public class AboutPanel extends JPanel {
     private JLabel label;
@@ -22,14 +23,16 @@ public class AboutPanel extends JPanel {
 
     public AboutPanel() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-        Border inner = BorderFactory.createTitledBorder("About");
+        Border inner = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "About");
+        ((TitledBorder) inner).setTitleColor(Color.WHITE);
         setBorder(new CompoundBorder(outer, inner));
-        setBackground(Color.WHITE);
+        setBackground(Color.DARK_GRAY);
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
         label = new JLabel("Download class info");
+        label.setForeground(Color.WHITE);
         setLabelFont(label);
         constraints = GridBagHelper.createConstraints(0, 1,
                 GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE,
@@ -56,6 +59,7 @@ public class AboutPanel extends JPanel {
         add(dropDownBox, constraints);
 
         label = new JLabel("Download School Register");
+        label.setForeground(Color.WHITE);
         setLabelFont(label);
         constraints = GridBagHelper.createConstraints(0, 2,
                 GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE,

@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GradientPanel extends JPanel {
+
+
+    public GradientPanel() {
+        setOpaque(false);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
