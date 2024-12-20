@@ -4,6 +4,8 @@ import org.zidioschool.model.modelClasses.Data;
 import org.zidioschool.model.modelClasses.Student;
 import org.zidioschool.services.DataFilter;
 import org.zidioschool.userInterface.customComponents.*;
+import org.zidioschool.userInterface.customComponents.panels.GradientPanel;
+import org.zidioschool.userInterface.customComponents.panels.RoundedPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,6 @@ import java.awt.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewList extends JPanel {
@@ -27,6 +28,7 @@ public class ViewList extends JPanel {
     private Table table;
     private Table.StudentsTableModel tableModel;
     private RoundedButton clearBtn;
+    private RoundedButton logoutButton;
 
     public ViewList() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -78,6 +80,11 @@ public class ViewList extends JPanel {
         lastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         lastPanel.setPreferredSize(new Dimension(300, 100));
         lastPanel.setOpaque(true);
+        logoutButton = new RoundedButton("Logout", 100, 40);
+        logoutButton.addActionListener(e -> {
+            MainUI.getInstance().showLoginUI();
+        });
+        lastPanel.add(logoutButton, BorderLayout.NORTH);
         add(lastPanel, BorderLayout.SOUTH);
     }
 

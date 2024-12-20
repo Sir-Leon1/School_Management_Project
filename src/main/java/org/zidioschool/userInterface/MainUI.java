@@ -4,6 +4,7 @@ import org.zidioschool.model.Model;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ public class MainUI extends JFrame {
     private JPanel btnPanel;
     private JPanel tabPanel;
     private ViewList viewList;
+    private SignUp signUp;
     private NewStudentPanel registrationPanel;
     private UpdatePanel updatePanel;
     private AboutPanel reportPanel;
@@ -29,13 +31,14 @@ public class MainUI extends JFrame {
     public MainUI() {
         setTitle("Zidio School manager");
 
-        setSize(700, 500);
+        setSize(750, 700);
         setLocationRelativeTo(null);
         mainPanel = new JPanel();
         setContentPane(mainPanel);
         mainPanel.setLayout(new BorderLayout());
 
         loginPanel = new LoginPanel();
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         mainPanel.add(loginPanel, BorderLayout.CENTER);
 
         btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -131,8 +134,26 @@ public class MainUI extends JFrame {
         add(btnPanel, BorderLayout.NORTH);
     }
 
+    public void showLoginUI() {
+
+        mainPanel.remove(signUp);
+        mainPanel.add(loginPanel, BorderLayout.CENTER);
+        mainPanel.revalidate(); // Refresh the UI
+        mainPanel.repaint(); // Refresh the UI
+    }
+
+    public void showSignUpUI() {
+        signUp = new SignUp();
+        mainPanel.remove(loginPanel);
+        mainUI.setLocationRelativeTo(null);
+        mainPanel.add(signUp, BorderLayout.CENTER);
+        mainPanel.revalidate(); // Refresh the UI
+        mainPanel.repaint(); // Refresh the UI
+    }
+
     private void closeApp() {
         Model.getInstance().getDatabaseDriver().closeConnection();
         System.exit(0);
     }
+
 }

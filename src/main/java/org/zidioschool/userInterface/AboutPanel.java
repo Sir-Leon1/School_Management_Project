@@ -4,8 +4,9 @@ import org.zidioschool.model.ClassDAO;
 import org.zidioschool.model.modelClasses.Clss;
 import org.zidioschool.services.pdfGenerator.PdfReportGenerator;
 import org.zidioschool.userInterface.customComponents.DropDownBox;
-import org.zidioschool.userInterface.customComponents.GradientPanel;
+import org.zidioschool.userInterface.customComponents.panels.GradientPanel;
 import org.zidioschool.userInterface.customComponents.RoundedButton;
+import org.zidioschool.userInterface.customComponents.panels.helpers.GridBagHelper;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,6 +21,7 @@ public class AboutPanel extends JPanel {
     private RoundedButton downloadBtn, downloadBtn2, downloadBtn3;
     private DropDownBox dropDownBox;
     private GradientPanel lastPanel;
+    private GridBagHelper GridBagHelper;
 
     public AboutPanel() {
         Border outer = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -78,7 +80,7 @@ public class AboutPanel extends JPanel {
         lastPanel = new GradientPanel();
         lastPanel.setLayout(new GridBagLayout());
         lastPanel.setForeground(Color.WHITE);
-        constraints = UpdatePanel.GridBagHelper.createConstraints(0, 11,
+        constraints = GridBagHelper.createConstraints(0, 11,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 0, 0, 10, 10);
         constraints.gridwidth = 3;
@@ -190,35 +192,6 @@ public class AboutPanel extends JPanel {
 
     }
 
-    public class GridBagHelper {
-        public static GridBagConstraints createConstraints(int gridx, int gridy) {
-            GridBagConstraints constraints = new GridBagConstraints();
-            constraints.gridx = gridx;
-            constraints.gridy = gridy;
-            constraints.gridwidth = 1;
-            constraints.gridheight = 1;
-            constraints.weightx = 0;
-            constraints.weighty = 0;
-            constraints.insets = new Insets(10, 10, 10, 10);
-            constraints.anchor = GridBagConstraints.NORTH;
-            constraints.fill = GridBagConstraints.NONE;
-
-            return constraints;
-        }
-
-        //Overload method to have custom weight or anchor if needed
-        public static GridBagConstraints createConstraints(int gridx, int gridy, int anchor, int fill, double weightx, double weighty, int ipadx, int ipady) {
-            GridBagConstraints constraints = createConstraints(gridx, gridy);
-            constraints.anchor = anchor;
-            constraints.weightx = weightx;
-            constraints.weighty = weighty;
-            constraints.ipadx = ipadx;
-            constraints.ipady = ipady;
-            constraints.fill = fill;
-
-            return constraints;
-        }
-    }
 
     public static void main(String[] args) {
         // Set up the Swing UI on the Event Dispatch Thread

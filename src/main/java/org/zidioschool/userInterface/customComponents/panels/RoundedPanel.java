@@ -1,4 +1,4 @@
-package org.zidioschool.userInterface.customComponents;
+package org.zidioschool.userInterface.customComponents.panels;
 
 import javax.swing.*;
 import java.awt.*;
